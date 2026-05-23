@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alfa Lavanderia</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue-50: #E6F1FB;
+    --blue-100: #B5D4F4;
+    --blue-200: #85B7EB;
+    --blue-400: #378ADD;
+    --blue-600: #185FA5;
+    --blue-800: #0C447C;
+    --blue-900: #042C53;
+    --font-title: 'DM Serif Display', serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: #fff;
+    color: #1a1a2e;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--blue-100);
+    padding: 0 2rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 36px; height: 36px;
+    background: var(--blue-600);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .logo-icon svg { width: 20px; height: 20px; fill: white; }
+
+  .nav-logo span {
+    font-family: var(--font-title);
+    font-size: 22px;
+    color: var(--blue-900);
+    letter-spacing: -0.5px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: #555;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--blue-600); }
+
+  .nav-cta {
+    background: var(--blue-600);
+    color: white !important;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: 600 !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--blue-800) !important; color: white !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--blue-50) 0%, #fff 60%);
+    display: flex;
+    align-items: center;
+    padding: 100px 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    right: -100px; top: 50%;
+    transform: translateY(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, var(--blue-100) 0%, transparent 70%);
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+
+  .hero-content {
+    max-width: 580px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--blue-50);
+    border: 1px solid var(--blue-100);
+    color: var(--blue-600);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.3px;
+  }
+
+  .hero-badge span { font-size: 16px; }
+
+  h1 {
+    font-family: var(--font-title);
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    color: var(--blue-900);
+    line-height: 1.1;
+    margin-bottom: 1.2rem;
+    letter-spacing: -1px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--blue-600);
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    max-width: 460px;
+    line-height: 1.7;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--blue-600);
+    color: white;
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s, transform 0.1s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover { background: var(--blue-800); transform: translateY(-1px); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--blue-600);
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    border: 1.5px solid var(--blue-200);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: border-color 0.2s, background 0.2s;
+    cursor: pointer;
+  }
+
+  .btn-secondary:hover { border-color: var(--blue-400); background: var(--blue-50); }
+
+  .hero-stats {
+    margin-top: 3.5rem;
+    display: flex;
+    gap: 2.5rem;
+  }
+
+  .stat strong {
+    display: block;
+    font-family: var(--font-title);
+    font-size: 2rem;
+    color: var(--blue-900);
+  }
+
+  .stat span {
+    font-size: 13px;
+    color: #888;
+    font-weight: 500;
+  }
+
+  /* SECTION COMMON */
+  section {
+    padding: 80px 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue-600);
+    margin-bottom: 0.8rem;
+  }
+
+  h2 {
+    font-family: var(--font-title);
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    color: var(--blue-900);
+    line-height: 1.2;
+    margin-bottom: 0.8rem;
+    letter-spacing: -0.5px;
+  }
+
+  .section-sub {
+    font-size: 17px;
+    color: #666;
+    margin-bottom: 3rem;
+    max-width: 520px;
+    font-weight: 300;
+  }
+
+  /* SERVIÇOS */
+  .services-section {
+    background: var(--blue-50);
+    max-width: 100%;
+    padding: 80px 2rem;
+  }
+
+  .services-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .service-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    border: 1px solid var(--blue-100);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--blue-400);
+    border-radius: 16px 16px 0 0;
+  }
+
+  .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(24,95,165,0.12); }
+
+  .service-icon {
+    width: 48px; height: 48px;
+    background: var(--blue-50);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.2rem;
+    font-size: 24px;
+  }
+
+  .service-card h3 {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--blue-900);
+    margin-bottom: 0.5rem;
+  }
+
+  .service-card p {
+    font-size: 14px;
+    color: #777;
+    line-height: 1.6;
+  }
+
+  /* PREÇOS */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .price-card {
+    background: white;
+    border: 1.5px solid var(--blue-100);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: transform 0.2s;
+  }
+
+  .price-card:hover { transform: translateY(-3px); }
+
+  .price-card.destaque {
+    border: 2px solid var(--blue-400);
+    position: relative;
+    background: var(--blue-900);
+  }
+
+  .badge-destaque {
+    position: absolute;
+    top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--blue-400);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 16px;
+    border-radius: 20px;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+  }
+
+  .price-card h3 {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--blue-600);
+    margin-bottom: 0.5rem;
+  }
+
+  .price-card.destaque h3 { color: var(--blue-200); }
+
+  .price-value {
+    font-family: var(--font-title);
+    font-size: 3rem;
+    color: var(--blue-900);
+    line-height: 1;
+    margin: 0.8rem 0 0.3rem;
+  }
+
+  .price-card.destaque .price-value { color: white; }
+
+  .price-unit {
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 1.5rem;
+  }
+
+  .price-card.destaque .price-unit { color: var(--blue-200); }
+
+  .price-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .price-features li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #555;
+  }
+
+  .price-card.destaque .price-features li { color: var(--blue-100); }
+
+  .price-features li::before {
+    content: '✓';
+    font-weight: 700;
+    color: var(--blue-400);
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+
+  /* DEPOIMENTOS */
+  .testimonials-section {
+    background: #f8faff;
+    max-width: 100%;
+    padding: 80px 2rem;
+  }
+
+  .testimonials-inner { max-width: 1100px; margin: 0 auto; }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .testimonial-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.8rem;
+    border: 1px solid var(--blue-100);
+  }
+
+  .stars {
+    color: #f5a623;
+    font-size: 18px;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+  }
+
+  .testimonial-text {
+    font-size: 15px;
+    color: #444;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .author-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--blue-100);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--blue-800);
+    flex-shrink: 0;
+  }
+
+  .author-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--blue-900);
+  }
+
+  .author-local {
+    font-size: 12px;
+    color: #aaa;
+  }
+
+  /* CONTATO */
+  .contact-section {
+    background: var(--blue-900);
+    max-width: 100%;
+    padding: 80px 2rem;
+  }
+
+  .contact-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  @media (max-width: 700px) {
+    .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+    nav .nav-links { display: none; }
+  }
+
+  .contact-left h2 { color: white; }
+  .contact-left p { color: var(--blue-100); font-size: 16px; margin-bottom: 2rem; font-weight: 300; }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .contact-info-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--blue-100);
+    font-size: 15px;
+  }
+
+  .contact-info-item strong { color: white; font-weight: 600; display: block; font-size: 13px; }
+
+  .contact-icon {
+    width: 40px; height: 40px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .contact-form {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+  }
+
+  .contact-form h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--blue-900);
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 6px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid #e0e8f4;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: #333;
+    outline: none;
+    transition: border-color 0.2s;
+    background: #fafcff;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--blue-400);
+    background: white;
+  }
+
+  .form-group textarea { resize: vertical; min-height: 90px; }
+
+  .whatsapp-btn {
+    width: 100%;
+    background: #25D366;
+    color: white;
+    border: none;
+    padding: 13px;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 1rem;
+    transition: background 0.2s, transform 0.1s;
+    text-decoration: none;
+  }
+
+  .whatsapp-btn:hover { background: #1da851; transform: translateY(-1px); }
+
+  /* FOOTER */
+  footer {
+    background: #02192f;
+    padding: 2rem;
+    text-align: center;
+    color: var(--blue-200);
+    font-size: 14px;
+  }
+
+  footer strong { color: white; }
+
+  /* ANIMAÇÕES */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-content > * {
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-content > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-content > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero-content > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero-content > *:nth-child(4) { animation-delay: 0.4s; }
+  .hero-content > *:nth-child(5) { animation-delay: 0.5s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 3H6a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3zm-3 9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg>
+    </div>
+    <span>Alfa Lavanderia</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#precos">Preços</a></li>
+    <li><a href="#depoimentos">Clientes</a></li>
+    <li><a href="#contato" class="nav-cta">Solicitar Coleta</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><span>✦</span> Lavanderia profissional em Queimados</div>
+    <h1>Roupas limpas,<br><em>vida mais leve.</em></h1>
+    <p class="hero-sub">Da coleta à entrega em domicílio — cuidamos das suas peças com carinho, agilidade e qualidade profissional.</p>
+    <div class="hero-btns">
+      <a href="#contato" class="btn-primary">📦 Agendar coleta</a>
+      <a href="#servicos" class="btn-secondary">Ver serviços →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><strong>48h</strong><span>prazo de entrega</span></div>
+      <div class="stat"><strong>100%</strong><span>satisfação garantida</span></div>
+      <div class="stat"><strong>+5★</strong><span>avaliações</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVIÇOS -->
+<div class="services-section" id="servicos">
+  <div class="services-inner">
+    <span class="section-label">O que fazemos</span>
+    <h2>Nossos serviços</h2>
+    <p class="section-sub">Atendemos com cuidado especial cada tipo de peça, do cotidiano ao mais delicado.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🫧</div>
+        <h3>Lavagem e Secagem</h3>
+        <p>Roupas do dia a dia lavadas e secas com sabão de qualidade profissional, prontas para usar.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">👔</div>
+        <h3>Passadoria</h3>
+        <p>Peças passadas a vapor com perfeição. Camisas, calças, vestidos e tudo que precisa de um toque especial.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🛏️</div>
+        <h3>Edredons e Cobertores</h3>
+        <p>Higienização profunda de edredons, cobertores, travesseiros e almofadas. Limpos e sem alérgenos.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🚐</div>
+        <h3>Entrega em Domicílio</h3>
+        <p>Coletamos e entregamos na sua porta. Praticidade total para você não precisar sair de casa.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PREÇOS -->
+<section id="precos">
+  <span class="section-label">Investimento</span>
+  <h2>Tabela de preços</h2>
+  <p class="section-sub">Preços transparentes, sem surpresas. Escolha o pacote ideal para você.</p>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <h3>Lavagem e Secagem</h3>
+      <div class="price-value">R$15</div>
+      <div class="price-unit">por kg</div>
+      <ul class="price-features">
+        <li>Mín. 3 kg por pedido</li>
+        <li>Sabão e amaciante inclusos</li>
+        <li>Separação por cor</li>
+        <li>Entrega em até 48h</li>
+      </ul>
+    </div>
+    <div class="price-card destaque">
+      <span class="badge-destaque">⭐ Mais pedido</span>
+      <h3>Pacote Completo</h3>
+      <div class="price-value" style="color:white">R$25</div>
+      <div class="price-unit">por kg</div>
+      <ul class="price-features">
+        <li>Lavagem + secagem + passadoria</li>
+        <li>Coleta e entrega grátis</li>
+        <li>Embalagem individual</li>
+        <li>Prioridade no atendimento</li>
+      </ul>
+    </div>
+    <div class="price-card">
+      <h3>Edredons/Cobertores</h3>
+      <div class="price-value">R$45</div>
+      <div class="price-unit">por peça</div>
+      <ul class="price-features">
+        <li>Lavagem especial</li>
+        <li>Secagem completa</li>
+        <li>Eliminação de ácaros</li>
+        <li>Perfumação inclusa</li>
+      </ul>
+    </div>
+  </div>
+  <p style="text-align:center; margin-top:2rem; color:#999; font-size:14px;">* Preços sujeitos a alteração. Consulte condições especiais para empresas.</p>
+</section>
+
+<!-- DEPOIMENTOS -->
+<div class="testimonials-section" id="depoimentos">
+  <div class="testimonials-inner">
+    <span class="section-label">Clientes</span>
+    <h2>O que dizem sobre nós</h2>
+    <p class="section-sub">A satisfação dos nossos clientes é a nossa maior conquista.</p>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Minhas roupas voltaram impecáveis! A entrega foi pontual e o atendimento muito atencioso. Com certeza virei cliente fiel."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">MR</div>
+          <div>
+            <div class="author-name">Maria Regina</div>
+            <div class="author-local">Queimados, RJ</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Encaminhei meu edredom e voltou como novo! O serviço de coleta e entrega em casa facilita demais a vida. Super indico!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">JP</div>
+          <div>
+            <div class="author-name">João Paulo</div>
+            <div class="author-local">Queimados, RJ</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"As camisas passadas ficam perfeitas! Preço justo, qualidade excelente e muita praticidade. Não troco por nada."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">AC</div>
+          <div>
+            <div class="author-name">Ana Claudia</div>
+            <div class="author-local">Queimados, RJ</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTATO -->
+<div class="contact-section" id="contato">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <span class="section-label" style="color: var(--blue-200);">Fale conosco</span>
+      <h2>Agende sua<br>coleta hoje</h2>
+      <p>Entre em contato pelo formulário ou direto no WhatsApp. Respondemos rapidinho!</p>
+      <div class="contact-info">
+        <div class="contact-info-item">
+          <div class="contact-icon">📍</div>
+          <div><strong>Localização</strong>Queimados, Rio de Janeiro – RJ</div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon">⏰</div>
+          <div><strong>Horário de atendimento</strong>Seg – Sáb, das 8h às 18h</div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon">🚐</div>
+          <div><strong>Coleta e entrega</strong>Queimados e região</div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <h3>Solicite sua coleta</h3>
+      <div class="form-group">
+        <label>Seu nome</label>
+        <input type="text" placeholder="Ex: Maria Silva">
+      </div>
+      <div class="form-group">
+        <label>WhatsApp</label>
+        <input type="tel" placeholder="(21) 96599-0680">
+      </div>
+      <div class="form-group">
+        <label>Serviço desejado</label>
+        <select>
+          <option>Lavagem e secagem</option>
+          <option>Pacote completo (lavar + passar)</option>
+          <option>Higienização de edredom/cobertor</option>
+          <option>Passadoria</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Observações (opcional)</label>
+        <textarea placeholder="Quantidade de peças, tipo de roupa, endereço..."></textarea>
+      </div>
+      <!-- ATENÇÃO: Substitua o número abaixo pelo número real da lavanderia -->
+      <a href="https://wa.me/5521999999999?text=Olá! Gostaria de agendar uma coleta na Alfa Lavanderia." target="_blank" class="whatsapp-btn">
+        💬 Enviar pelo WhatsApp
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <strong>Alfa Lavanderia</strong> · Queimados, Rio de Janeiro · Feito com ❤️</p>
+</footer>
+
+</body>
+</html>
